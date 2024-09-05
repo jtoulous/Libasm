@@ -1,21 +1,15 @@
-bits64
-
-
-section .text
-    global ft_strlen
+global ft_strlen
 
 ft_strlen:
-    mov rax, 0   ;counter
+	mov		rax, 0
 
-    .loopstart:
-        mov al, [rdi]
+    loop_start:
+;        mov     r8b, [rdi]
+        cmp     BYTE [rdi], 0
+    	jz		loop_end				 
+    	inc		rax
+        inc     rdi					
+    	jmp		loop_start			
 
-        cmp al, 0
-        jz .loopend
-
-        inc rdi
-        inc rax
-        jmp .loopstart
-    
-    .loopend:
-        ret
+    loop_end:
+    	ret
