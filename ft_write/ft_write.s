@@ -1,5 +1,6 @@
-global  ft_write
-extern  __errno_location
+section .text    
+    global  ft_write
+    extern  __errno_location
 
 ft_write:
     mov     rax, 1
@@ -13,7 +14,7 @@ ft_write:
 error_handling:
     neg rax                 ;errno is the positive of the negative return
     mov rdi, rax
-    call __errno_location    ;places the address to errno in rax
+    call [rel __errno_location wrt ..got]    ;places the address to errno in rax
 
     mov [rax], rdi
     mov rax, -1

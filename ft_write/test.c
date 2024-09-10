@@ -4,9 +4,13 @@
 ssize_t ft_write(int fd, const void *buf, ssize_t nbyte);
 
 int main(int argc, char **argv){
-    size_t size = strlen(argv[1]);
-    size_t rtn = ft_write(1, argv[1], size);
+    char *str = "123456789";
+    char *buffer = str;
+//    size_t rtn = ft_write(1, 'this is a test string', 21);
+//    printf("\nreturn = %zd", rtn);
+    
+    size_t  rtn = ft_write(1, buffer, 15);
+    printf("\nreturn = %zd", rtn);
 
-    printf("rtn = %zd", rtn);
     return 0;
 }
