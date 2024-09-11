@@ -7,15 +7,14 @@ ft_write:
     syscall                 ;call real write
 
     cmp rax, 0
-    jl error_handling       ;if return value < 0  ==> error_handling  
+    jl      .error_handling       ;if return value < 0  ==> error_handling  
     ret
 
+.error_handling:
+    neg     rax            ;errno is the positive of the negative return
+    mov     rdi, rax
+    call    [rel __errno_location wrt ..got]    ;places the address to errno in rax
 
-error_handling:
-    neg rax                 ;errno is the positive of the negative return
-    mov rdi, rax
-    call [rel __errno_location wrt ..got]    ;places the address to errno in rax
-
-    mov [rax], rdi
-    mov rax, -1
+    mov     [rax], rdi
+    mov     rax, -1
     ret
