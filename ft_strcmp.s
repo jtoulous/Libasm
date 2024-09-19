@@ -17,7 +17,7 @@ ft_strcmp:
 
     .loop_restart:
         cmp     byte [rdi + rax], 0
-        jne     .loop_start       ;else 
+        jne     .loop_start 
 
     .loop_end:
         mov rax, r8
